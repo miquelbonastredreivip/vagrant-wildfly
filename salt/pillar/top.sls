@@ -1,0 +1,4 @@
+base:
+  'vanilla-prestashop':
+    - prestashop
+
