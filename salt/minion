@@ -5,16 +5,20 @@ file_roots:
   base:
     - /srv/salt
 
-# php-formula per a gestionar configuració del php:
-# - Amb aquesta configuració fem que el minion accedeixi directament
-#   al repositori github de la fórmula.
-# - Alternativament, podríem afegir un submòdul al nostre repo git
-# - Fixem la versió (per a l'entorn "base") per a controlar quan
-#   volem incorporar els canvis que es facin al projecte php-formula
-#Estem usant: https://github.com/saltstack-formulas/php-formula/tree/v1.3.1
+# Fixem les versions de les formules per a poder controlar
+# quan incorporem els canvis que es facin als respectius
+# projectes.
+#
+# - Fixem la versió per a l'entorn "base"
+# - Haurem de crear entorns dev i altres
+#
 gitfs_remotes:
   - https://github.com/saltstack-formulas/php-formula.git:
     - base: v1.3.1
+  - https://github.com/saltstack-formulas/apache-formula.git:
+    - base: v1.1.0
+  - https://github.com/saltstack-formulas/mysql-formula.git:
+    - base: v0.54.2
 
 fileserver_backend:
   - roots
