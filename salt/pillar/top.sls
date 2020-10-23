@@ -1,4 +1,5 @@
 base:
   'vanilla-prestashop':
-    - prestashop
+    - php
+    - apache2
 
