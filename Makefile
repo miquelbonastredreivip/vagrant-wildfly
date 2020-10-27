@@ -1,6 +1,6 @@
 
 
-all: provision
+all: provision reload
 
 clean: destroy delete_logs
 
@@ -12,6 +12,9 @@ up: validate
 
 up-log: validate
 	vagrant up 2>&1 | tee up.log
+
+reload: validate
+	vagrant reload
 
 provision: validate
 	vagrant provision

@@ -13,6 +13,9 @@ Vagrant.configure("2") do |config|
   # Necessitem aquest paquet abans d'executar
   # el "provision :salt"
   config.vm.provision "shell",
+    # ubuntu 20.04 LTS (Focal Fossa)
+    #inline: "apt-get -y update ; apt-get -y install python3-pygit2"
+    # ubuntu 18.04 LTS (Bionic Beaver)
     inline: "apt-get -y update ; apt-get -y install python-pygit2"
 
   config.vm.provision :salt, run: "always" do |salt|
@@ -21,10 +24,6 @@ Vagrant.configure("2") do |config|
     salt.run_highstate = true
     salt.colorize      = true
     salt.verbose       = true
-
-    # La informació "pillar" es pot afegir aquí
-    # o sincronitzar /srv/pillar
-    #
   end
 end
 
