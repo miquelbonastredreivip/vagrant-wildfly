@@ -1,8 +1,10 @@
 
 
-all: provision reload
+all: provision
 
 clean: destroy delete_logs
+
+reset:  validate clean up-log
 
 validate:
 	vagrant validate
@@ -15,6 +17,7 @@ up-log: validate
 
 reload: validate
 	vagrant reload
+
 
 provision: validate
 	vagrant provision

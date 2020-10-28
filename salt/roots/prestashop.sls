@@ -1,4 +1,11 @@
 
+wait_for_apache:
+  http.wait_for_successful_query:
+    - name: {{ salt['pillar.get']('prestashop:lookup:apache_url') }}
+    - wait_for: 300
+    - request_interval: 1
+    - status: 200
+
 extract_prestashop_package:
   archive.extracted:
     - name: {{ salt['pillar.get']('prestashop:lookup:ps_dir') }}
@@ -8,4 +15,29 @@ extract_prestashop_package:
     - keep_source: false
     - enforce_toplevel: false
     - enforce_ownership_on: {{ salt['pillar.get']('prestashop:lookup:ps_dir') }}
+    - unless:
+      - ls {{ salt['pillar.get']('prestashop:lookup:ps_dir') }}/* > /dev/null 2>&1
+
+extract_prestashop:
+  cmd.script:
+    - name: ps_extract.py {{ salt['pillar.get']('prestashop:lookup:extract_url') }}
+    - source: salt://scripts/ps_extract.py
+    #- creates: {{ salt['pillar.get']('prestashop:lookup:ps_zip_content') }}
+    - require:
+      - wait_for_apache
+    - require_in:
+      - http: install_assistant
+    - onlyif:
+      - test -f {{ salt['pillar.get']('prestashop:lookup:ps_zip') }}
+
+install_assistant:
+  http.query:
+    - name: {{ salt['pillar.get']('prestashop:lookup:install_url') }}
+    - status: 200
+    - require:
+      - http: wait_for_apache
+
+#ToDo:
+#  - Check mysql install
+#  - Delete install dir
 

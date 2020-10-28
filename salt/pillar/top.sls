@@ -1,5 +1,6 @@
 base:
   'vanilla-prestashop':
-    - php
-    - apache2
+    - ps_mysql
+    - ps_php
+    - ps_apache2
     - prestashop
