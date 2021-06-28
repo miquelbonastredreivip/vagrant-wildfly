@@ -4,3 +4,5 @@ packages:
   pkgs:
     wanted:
       - openjdk-8-jdk
+      - git
+      - maven

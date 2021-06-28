@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
     host.vm.hostname = "vanilla-wildfly"
     host.vm.synced_folder "salt/roots/", "/srv/salt/"
     host.vm.synced_folder "salt/pillar/",  "/srv/pillar/"
-    host.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
+    host.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
   end
 
   # Provision "shell":
@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
     salt.masterless = true
     salt.minion_config = "salt/minion"
     salt.run_highstate = true
-    salt.verbose = false
+    salt.verbose = true
   end
 
 end

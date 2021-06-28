@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.miquelbonastredreivip</groupId>
+  <artifactId>vagrant-wildfly</artifactId>
+  <version>0.0.1</version>
+  <packaging>pom</packaging>
+
+  <name>Build and run a WildFly project inside a Vagrant VM</name>
+  <description>
+  This project is build inside a Vagrant VM;
+  Optionally, it can also start the Wildfly server
+  with the sample application deployed.
+  Copied from 
+  https://github.com/wildfly-extras/wildfly-jar-maven-plugin/blob/5.0.1.Final/examples/ejb-in-ear/pom.xml
+  </description>
+
+  <properties>
+    <version.wildfly>24.0.0.Final</version.wildfly>
+    <version.bootable.jar>5.0.1.Final</version.bootable.jar>
+    <plugin.fork.embedded>true</plugin.fork.embedded>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+  </properties>
+
+  <modules>
+    <module>ejb</module>
+    <module>web</module>
+    <module>ear</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+    <!-- Modules inside this projecte -->
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>ejb-in-ear-ejb</artifactId>
+        <version>${project.version}</version>
+        <type>ejb</type>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>ejb-in-ear-web</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+      </dependency>
+
+      <!-- External dependencies -->
+      <dependency>
+          <groupId>jakarta.platform</groupId>
+          <artifactId>jakarta.jakartaee-api</artifactId>
+          <version>8.0.0</version>
+          <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <!-- Due to Maven's lack of intelligence with EARs we need to configure
+        the WildFly Jar Maven plug-in to be skipped for all modules. We then enable
+        it specifically in the ear module. -->
+      <plugin>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-jar-maven-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
