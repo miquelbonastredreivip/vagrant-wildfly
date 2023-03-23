@@ -1,10 +1,10 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.define "prestashop" do |host|
+  config.vm.define "wildfly" do |host|
     #host.vm.box     = "ubuntu/focal64"   # ubuntu 20.04 LTS (Focal Fossa)
     host.vm.box      = "ubuntu/bionic64"  # ubuntu 18.04 LTS (Bionic Beaver)
-    host.vm.hostname = "vanilla-prestashop"
+    host.vm.hostname = "vanilla-wildfly"
     host.vm.synced_folder "salt/roots/",   "/srv/salt/"
     host.vm.synced_folder "salt/pillar/",  "/srv/pillar/"
     host.vm.network "forwarded_port", guest: 80, host: 8080

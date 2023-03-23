@@ -1,2 +1,2 @@
-# vagrant-prestashop
-Configuració d'una VM amb Prestashop
+# vagrant-wildfly
+Configuració d'una VM amb Wildfly

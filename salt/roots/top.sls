@@ -1,7 +1,6 @@
 base:
-  'vanilla-prestashop':
-    - ps_mysql
-    - ps_php
-    - ps_apache
-    - prestashop
+  'vanilla-wildfly':
+    - wf_mysql
+    - wf_apache2
+    #- wildfly
 

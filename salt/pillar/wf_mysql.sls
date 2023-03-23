@@ -3,12 +3,12 @@ mysql:
     root_password: ''
     user: mysql
   database:
-    - prestashop
+    - wildfly
   user:
-    prestashop:
+    wildfly:
       password: ~
       host: localhost
       databases:
-        - database: prestashop
+        - database: wildfly
           grants: ['all privileges']
     
